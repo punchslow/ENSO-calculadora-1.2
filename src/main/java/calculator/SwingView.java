@@ -10,12 +10,16 @@ package calculator;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
+import java.util.Objects;
 
 import javax.imageio.ImageIO;
 import javax.swing.Box;
@@ -63,6 +67,9 @@ public class SwingView implements View {
         decimalFormat.setGroupingUsed(false);
 
         frame = new JFrame("Calculator");
+        // Makes frame focusable to enable key events
+        frame.setFocusable(true);
+        frame.requestFocus();
         image = loadIcon();
 
         mainPanel = new JPanel();
@@ -256,6 +263,14 @@ public class SwingView implements View {
         butCancel.addActionListener(e -> eventHandler.onClearPressed());
         butBackspace.addActionListener(e -> eventHandler.onBackspacePressed());
 
+        KeyAdapter pusi = new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                System.out.println("Typed "+e.getKeyChar());
+                eventHandler.onKeyTyped(e.getKeyChar());
+            }
+        };
+        frame.addKeyListener(pusi);
         //Constantes
         butPi.addActionListener(e -> eventHandler.onConstantPressed(Math.PI));
         butE.addActionListener(e  -> eventHandler.onConstantPressed(Math.E));
