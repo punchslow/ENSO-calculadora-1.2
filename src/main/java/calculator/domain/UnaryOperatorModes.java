@@ -15,6 +15,9 @@ public enum UnaryOperatorModes {
     COS,        // Cosine of an angle in Degrees
     SIN,        // Sine  of an angle in Degrees
     TAN,        // Tangent  of an angle in Degrees
+    ACOS,       // Arccosine of an angle in Degrees
+    ASIN,       // Arcsine of an angle in Degrees
+    ATAN,       // Arctangent of an angle in Degrees
     LOG,        // Base-10 logarithm
     LN,         // Natural logarithm (base e)
     PERCENT,    // Percentage
