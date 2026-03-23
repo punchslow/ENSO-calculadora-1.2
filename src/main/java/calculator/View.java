@@ -44,4 +44,8 @@ public interface View {
      * @param listener The action listener
      */
     void setActionListener(EventHandler listener);
+    
+    String getLabel();
+    
+    void setLabel(String nombre);
 }

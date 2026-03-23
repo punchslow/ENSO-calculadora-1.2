@@ -118,6 +118,17 @@ public class Controller implements EventHandler {
         resetingInput = false;
     }
     
+    @Override
+    public void onDegreesPressed(){
+        String tipo = view.getLabel();
+        if(tipo.equals("DEG")){
+            view.setLabel("RAD");
+        }
+        else if(tipo.equals("RAD")){
+            view.setLabel("DEG");
+        }
+    }
+    
     private String formatResult(Double result) {
         if (Double.isNaN(result)) {
             return "NaN";
