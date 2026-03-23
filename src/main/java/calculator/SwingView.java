@@ -26,12 +26,14 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 import static calculator.domain.BinaryOperatorModes.*;
+import calculator.domain.DegreesRadiansModes;
 import static calculator.domain.UnaryOperatorModes.*;
 
 public class SwingView implements View {
@@ -45,9 +47,11 @@ public class SwingView implements View {
     private final JButton butAdd, butMinus, butMultiply, butDivide,
             butEqual, butCancel, butSqrt, butSquare, butInv, butCos, 
             butSin, butTan, butPower, butLog, butPercent, butAbs, butBin, 
-            butln, butNegate, butDecimal, butPi, butE;
+            butln, butNegate, butDecimal, butDegrees, butPi, butE;
+    private JLabel degrad;
 
     private EventHandler eventHandler;
+    private DegreesRadiansModes modo = DegreesRadiansModes.DEGREES;
 
     private final Font numberFont = new Font("Segoe UI", Font.BOLD, 18);
     private final Font functionFont = new Font("Segoe UI", Font.PLAIN, 18);
@@ -124,8 +128,13 @@ public class SwingView implements View {
         butDecimal = createButton(".", ButtonType.NUMBER);
         butPi = createButton("π", ButtonType.NUMBER);
         butE  = createButton("e",  ButtonType.NUMBER);
-        
+        butDegrees = createButton("dg|r", ButtonType.FUNCTION);
 
+
+        degrad = new JLabel("DEG");
+        degrad.setForeground(Color.BLUE);
+        degrad.setFont(new Font("Segoe UI", Font.BOLD, 18));
+        
         setupLayout();
     }
 
@@ -177,6 +186,8 @@ public class SwingView implements View {
         subPanels[4].add(butNegate);
         subPanels[4].add(butNums[0]);
         subPanels[4].add(butDecimal);
+        subPanels[4].add(Box.createHorizontalStrut(15));
+        subPanels[4].add(degrad);
         mainPanel.add(subPanels[4]);
 
         // --- Extra separation ---
@@ -186,6 +197,8 @@ public class SwingView implements View {
         subPanels[5].add(butInv);
         subPanels[5].add(butln);
         subPanels[5].add(butLog);
+        subPanels[5].add(Box.createHorizontalStrut(15));
+        subPanels[5].add(butDegrees);
         mainPanel.add(subPanels[5]);
 
         // --- Row 6 ---
@@ -216,9 +229,9 @@ public class SwingView implements View {
     }
 
     public void init() {
-        frame.setSize(465, 460);
+        frame.setSize(550, 460);
         frame.setLocationRelativeTo(null);
-        frame.setResizable(false);
+        frame.setResizable(true);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         if (image != null) frame.setIconImage(image.getImage());
         frame.add(mainPanel);
@@ -261,6 +274,7 @@ public class SwingView implements View {
         butDecimal.addActionListener(e -> eventHandler.onDecimalPressed());
         butEqual.addActionListener(e -> eventHandler.onEqualsPressed());
         butCancel.addActionListener(e -> eventHandler.onClearPressed());
+        butDegrees.addActionListener(e -> eventHandler.onDegreesPressed());
         butBackspace.addActionListener(e -> eventHandler.onBackspacePressed());
 
         KeyAdapter pusi = new KeyAdapter() {
@@ -349,4 +363,25 @@ public class SwingView implements View {
             return null;
         }
     }
+    
+    @Override
+    public String getLabel(){
+        return degrad.getText();
+    }
+    
+    @Override
+    public void setLabel(String nombre){
+        this.degrad.setText(nombre);
+    }
+    
+    @Override
+    public DegreesRadiansModes getMode(){
+        return modo;
+    }
+    
+    @Override
+    public void setMode(DegreesRadiansModes modo){
+        this.modo = modo;
+    }
+    
 }
