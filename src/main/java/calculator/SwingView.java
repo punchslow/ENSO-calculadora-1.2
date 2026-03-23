@@ -27,23 +27,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
-import static calculator.domain.BinaryOperatorModes.ADD;
-import static calculator.domain.BinaryOperatorModes.DIVIDE;
-import static calculator.domain.BinaryOperatorModes.MINUS;
-import static calculator.domain.BinaryOperatorModes.MULTIPLY;
-import static calculator.domain.BinaryOperatorModes.POWER;
-import static calculator.domain.UnaryOperatorModes.ABS;
-import static calculator.domain.UnaryOperatorModes.BIN;
-import static calculator.domain.UnaryOperatorModes.COS;
-import static calculator.domain.UnaryOperatorModes.INV;
-import static calculator.domain.UnaryOperatorModes.LN;
-import static calculator.domain.UnaryOperatorModes.LOG;
-import static calculator.domain.UnaryOperatorModes.NEGATE;
-import static calculator.domain.UnaryOperatorModes.PERCENT;
-import static calculator.domain.UnaryOperatorModes.SIN;
-import static calculator.domain.UnaryOperatorModes.SQRT;
-import static calculator.domain.UnaryOperatorModes.SQUARE;
-import static calculator.domain.UnaryOperatorModes.TAN;
+import static calculator.domain.BinaryOperatorModes.*;
+import static calculator.domain.UnaryOperatorModes.*;
 
 public class SwingView implements View {
 
