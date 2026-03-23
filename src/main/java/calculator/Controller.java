@@ -56,12 +56,12 @@ public class Controller implements EventHandler {
         }
        
         // Prevent multiple decimal points in the current number
-        if (!displayBuffer.toString().contains(".")) {
+        if (!displayBuffer.toString().contains(",")) {
             // Handle leading decimal point by prepending a "0"
             if (displayBuffer.length() == 0) {
                 displayBuffer.append("0");
             }
-            displayBuffer.append(".");
+            displayBuffer.append(",");
             view.setDisplay(displayBuffer.toString());
         }
     }
@@ -170,7 +170,8 @@ public class Controller implements EventHandler {
         }
         else {
             String formatted = String.format(java.util.Locale.US, "%.10f", result);
-            return formatted.replaceAll("0*$", "").replaceAll("\\.$", "");
+            formatted = formatted.replaceAll("0*$", "").replaceAll("\\.$", "");
+            return formatted.replace('.', ',');
         }
     }
 
