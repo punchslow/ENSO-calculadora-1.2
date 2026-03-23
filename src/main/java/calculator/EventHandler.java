@@ -45,4 +45,7 @@ public interface EventHandler {
      * Handle the clear/reset button press
      */
     void onClearPressed();
+
+    /*Controla los botones de pi y e*/
+    void onConstantPressed(double value);
 }
