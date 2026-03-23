@@ -96,6 +96,7 @@ public class SwingView implements View {
         butDivide = createButton("/", ButtonType.FUNCTION);
         butEqual = createButton("=", ButtonType.FUNCTION);
         butCancel = createButton("C", ButtonType.FUNCTION);
+        butBackspace = createButton("Esc", ButtonType.FUNCTION);
         butSqrt = createButton("sqrt", ButtonType.FUNCTION);
         butSquare = createButton("x^2", ButtonType.FUNCTION);
         butInv = createButton("1/x", ButtonType.FUNCTION);
@@ -235,6 +236,7 @@ public class SwingView implements View {
         butDecimal.addActionListener(e -> eventHandler.onDecimalPressed());
         butEqual.addActionListener(e -> eventHandler.onEqualsPressed());
         butCancel.addActionListener(e -> eventHandler.onClearPressed());
+        butBackspace.addActionListener(e -> eventHandler.onBackspacePressed());
     }
 
     @Override
