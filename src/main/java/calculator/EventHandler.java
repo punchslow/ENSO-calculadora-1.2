@@ -50,4 +50,6 @@ public interface EventHandler {
      * Handle keyboard input
      */
     void onKeyTyped(char character);
+    /*Controla los botones de pi y e*/
+    void onConstantPressed(double value);
 }

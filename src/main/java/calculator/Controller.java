@@ -159,4 +159,12 @@ public class Controller implements EventHandler {
             return formatted.replaceAll("0*$", "").replaceAll("\\.$", "");
         }
     }
+    
+    @Override
+    public void onConstantPressed(double value) {
+        displayBuffer = new StringBuilder();
+        displayBuffer.append(value);
+        view.setDisplay(formatResult(value));
+        resetingInput = false;
+    }
 }
