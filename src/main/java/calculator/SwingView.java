@@ -16,6 +16,7 @@ import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
+
 import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -35,12 +36,12 @@ public class SwingView implements View {
     private final JPanel mainPanel;
     private final JPanel[] subPanels;
     private final JTextField text;
-
+    private final JButton butAcos, butAsin, butAtan;
     private final JButton[] butNums;
     private final JButton butAdd, butMinus, butMultiply, butDivide,
             butEqual, butCancel, butSqrt, butSquare, butInv, butCos, 
             butSin, butTan, butPower, butLog, butPercent, butAbs, butBin, 
-            butln, butNegate, butDecimal;
+            butln, butNegate, butDecimal, butPi, butE;
 
     private EventHandler eventHandler;
 
@@ -67,8 +68,8 @@ public class SwingView implements View {
         mainPanel = new JPanel();
         mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 
-        subPanels = new JPanel[9];
-        for (int i = 0; i < 9; i++) {
+        subPanels = new JPanel[10];
+        for (int i = 0; i < 10; i++) {
             subPanels[i] = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 3));
         }
 
@@ -103,6 +104,9 @@ public class SwingView implements View {
         butCos = createButton("cos", ButtonType.FUNCTION);
         butSin = createButton("sin", ButtonType.FUNCTION);
         butTan = createButton("tan", ButtonType.FUNCTION);
+        butAcos = createButton("acos", ButtonType.FUNCTION);
+        butAsin = createButton("asin", ButtonType.FUNCTION);
+        butAtan = createButton("atan", ButtonType.FUNCTION);
         butln = createButton("ln", ButtonType.FUNCTION);
         butPower = createButton("x^y", ButtonType.FUNCTION);
         butLog = createButton("log", ButtonType.FUNCTION);
@@ -111,6 +115,9 @@ public class SwingView implements View {
         butBin = createButton("bin", ButtonType.FUNCTION);
         butNegate = createButton("+/-", ButtonType.NUMBER);
         butDecimal = createButton(".", ButtonType.NUMBER);
+        butPi = createButton("π", ButtonType.NUMBER);
+        butE  = createButton("e",  ButtonType.NUMBER);
+        
 
         setupLayout();
     }
@@ -178,6 +185,8 @@ public class SwingView implements View {
         subPanels[6].add(butSquare);
         subPanels[6].add(butSqrt);
         subPanels[6].add(butPower);
+        subPanels[6].add(butPi);
+        subPanels[6].add(butE);
         mainPanel.add(subPanels[6]);
 
         // --- Row 7 ---
@@ -191,6 +200,12 @@ public class SwingView implements View {
         subPanels[8].add(butAbs);
         subPanels[8].add(butBin);
         mainPanel.add(subPanels[8]);
+
+        subPanels[9] = new JPanel(new FlowLayout(FlowLayout.LEFT, 5, 3));
+        subPanels[9].add(butAcos);
+        subPanels[9].add(butAsin);
+        subPanels[9].add(butAtan);
+        mainPanel.add(subPanels[9]);
     }
 
     public void init() {
@@ -225,6 +240,9 @@ public class SwingView implements View {
         butCos.addActionListener(e -> eventHandler.onUnaryOperatorPressed(COS));
         butSin.addActionListener(e -> eventHandler.onUnaryOperatorPressed(SIN));
         butTan.addActionListener(e -> eventHandler.onUnaryOperatorPressed(TAN));
+        butAcos.addActionListener(e -> eventHandler.onUnaryOperatorPressed(ACOS));
+        butAsin.addActionListener(e -> eventHandler.onUnaryOperatorPressed(ASIN));
+        butAtan.addActionListener(e -> eventHandler.onUnaryOperatorPressed(ATAN));
         butLog.addActionListener(e -> eventHandler.onUnaryOperatorPressed(LOG));
         butln.addActionListener(e -> eventHandler.onUnaryOperatorPressed(LN));
         butPercent.addActionListener(e -> eventHandler.onUnaryOperatorPressed(PERCENT));
@@ -237,6 +255,10 @@ public class SwingView implements View {
         butEqual.addActionListener(e -> eventHandler.onEqualsPressed());
         butCancel.addActionListener(e -> eventHandler.onClearPressed());
         butBackspace.addActionListener(e -> eventHandler.onBackspacePressed());
+
+        //Constantes
+        butPi.addActionListener(e -> eventHandler.onConstantPressed(Math.PI));
+        butE.addActionListener(e  -> eventHandler.onConstantPressed(Math.E));
     }
 
     @Override

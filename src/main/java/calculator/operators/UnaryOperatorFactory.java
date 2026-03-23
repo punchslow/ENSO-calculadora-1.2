@@ -25,6 +25,9 @@ public class UnaryOperatorFactory {
             case COS -> new CosOperator();
             case SIN -> new SinOperator();
             case TAN -> new TanOperator();
+            case ACOS -> new AcosOperator();
+            case ASIN -> new AsinOperator();
+            case ATAN -> new AtanOperator();
             case LOG -> new LogOperator();
             case LN -> new LnOperator();
             case PERCENT -> new PercentOperator();

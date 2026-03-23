@@ -47,4 +47,6 @@ public interface EventHandler {
     void onClearPressed();
 
     void onBackspacePressed();
+    /*Controla los botones de pi y e*/
+    void onConstantPressed(double value);
 }
