@@ -47,7 +47,7 @@ public class SwingView implements View {
     private final JButton butAdd, butMinus, butMultiply, butDivide,
             butEqual, butCancel, butSqrt, butSquare, butInv, butCos, 
             butSin, butTan, butPower, butLog, butPercent, butAbs, butBin, 
-            butln, butNegate, butDecimal, butDegrees, butPi, butE;
+            butln, butNegate, butDecimal, butDegrees, butPi, butE, butBackspace;
     private JLabel degrad;
 
     private EventHandler eventHandler;
@@ -108,7 +108,7 @@ public class SwingView implements View {
         butDivide = createButton("/", ButtonType.FUNCTION);
         butEqual = createButton("=", ButtonType.FUNCTION);
         butCancel = createButton("C", ButtonType.FUNCTION);
-        butBackspace = createButton("Esc", ButtonType.FUNCTION);
+        butBackspace = createButton("←", ButtonType.FUNCTION);
         butSqrt = createButton("sqrt", ButtonType.FUNCTION);
         butSquare = createButton("x^2", ButtonType.FUNCTION);
         butInv = createButton("1/x", ButtonType.FUNCTION);
@@ -180,6 +180,7 @@ public class SwingView implements View {
         subPanels[3].add(Box.createHorizontalStrut(15));
         subPanels[3].add(butEqual);
         subPanels[3].add(butCancel);
+        subPanels[3].add(butBackspace);
         mainPanel.add(subPanels[3]);
 
         // --- Row 4 ---
