@@ -45,6 +45,11 @@ public interface EventHandler {
      * Handle the clear/reset button press
      */
     void onClearPressed();
+    
+    /**
+     * Handle the degree/radian button press
+     */
+    void onDegreesPressed();
 
     /**
      * Handle keyboard input

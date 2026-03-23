@@ -10,6 +10,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import calculator.domain.BinaryOperatorModes;
 import calculator.domain.UnaryOperatorModes;
+import calculator.domain.DegreesRadiansModes;
 import static calculator.domain.BinaryOperatorModes.*;
 
 class CalculatorModelTest {
@@ -114,6 +115,6 @@ class CalculatorModelTest {
     })
     void calculateUnaryParameterizedTest(UnaryOperatorModes mode, double input, double expected) {
         CalculatorModel calculator = new CalculatorModel();
-        assertEquals(expected, calculator.calculateUnary(mode, input), 1e-10);
+        assertEquals(expected, calculator.calculateUnary(mode, input, DegreesRadiansModes.DEGREES), 1e-10);
     }
 }
