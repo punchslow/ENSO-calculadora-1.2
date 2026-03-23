@@ -45,4 +45,9 @@ public interface EventHandler {
      * Handle the clear/reset button press
      */
     void onClearPressed();
+
+    /**
+     * Handle keyboard input
+     */
+    void onKeyTyped(char character);
 }
