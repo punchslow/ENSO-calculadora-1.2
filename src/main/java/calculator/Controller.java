@@ -10,6 +10,7 @@
 package calculator;
 
 import calculator.domain.BinaryOperatorModes;
+import calculator.domain.DegreesRadiansModes;
 import calculator.domain.UnaryOperatorModes;
 
 public class Controller implements EventHandler {
@@ -86,7 +87,7 @@ public class Controller implements EventHandler {
         if (displayBuffer.length() > 0) {
 
             Double num = view.getDisplayValue();
-            Double result = model.calculateUnary(mode, num);
+            Double result = model.calculateUnary(mode, num, view.getMode());
 
             displayBuffer = new StringBuilder();
             view.setDisplay(formatResult(result));
@@ -123,9 +124,11 @@ public class Controller implements EventHandler {
         String tipo = view.getLabel();
         if(tipo.equals("DEG")){
             view.setLabel("RAD");
+            view.setMode(DegreesRadiansModes.RADIANS);
         }
         else if(tipo.equals("RAD")){
             view.setLabel("DEG");
+            view.setMode(DegreesRadiansModes.DEGREES);
         }
     }
     

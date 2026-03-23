@@ -117,11 +117,9 @@ public class SwingView implements View {
         butBin = createButton("bin", ButtonType.FUNCTION);
         butNegate = createButton("+/-", ButtonType.NUMBER);
         butDecimal = createButton(".", ButtonType.NUMBER);
-<<<<<<< HEAD
+
         butDegrees = createButton("dg|r", ButtonType.FUNCTION);
-=======
-        
->>>>>>> origin/main
+
 
         degrad = new JLabel("DEG");
         degrad.setForeground(Color.BLUE);

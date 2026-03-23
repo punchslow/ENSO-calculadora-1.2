@@ -13,6 +13,7 @@ import calculator.operators.UnaryOperatorFactory;
 import calculator.domain.UnaryOperatorModes;
 import calculator.operators.BinaryOperatorFactory;
 import calculator.domain.BinaryOperatorModes;
+import calculator.domain.DegreesRadiansModes;
 
 public class CalculatorModel {
 
@@ -75,8 +76,8 @@ public class CalculatorModel {
     /**
      * Unary operations
      */
-    public Double calculateUnary(UnaryOperatorModes newMode, Double num) {
-        return UnaryOperatorFactory.create(newMode).execute(num);
+    public Double calculateUnary(UnaryOperatorModes newMode, Double num, DegreesRadiansModes grados) {
+        return UnaryOperatorFactory.create(newMode, grados).execute(num);
     }
 }
 
