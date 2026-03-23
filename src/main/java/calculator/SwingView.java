@@ -57,7 +57,7 @@ public class SwingView implements View {
     public SwingView() throws IOException {
         Locale.setDefault(Locale.US);
         DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.US);
-        symbols.setDecimalSeparator('.');
+        symbols.setDecimalSeparator(',');
         decimalFormat = new DecimalFormat("0.###############", symbols);
         decimalFormat.setGroupingUsed(false);
 
@@ -109,7 +109,7 @@ public class SwingView implements View {
         butAbs = createButton("abs", ButtonType.FUNCTION);
         butBin = createButton("bin", ButtonType.FUNCTION);
         butNegate = createButton("+/-", ButtonType.NUMBER);
-        butDecimal = createButton(".", ButtonType.NUMBER);
+        butDecimal = createButton(",", ButtonType.NUMBER);
 
         setupLayout();
     }
@@ -264,6 +264,8 @@ public class SwingView implements View {
             case "-Inf":
                 return Double.NEGATIVE_INFINITY;
         }
+
+        textValue = textValue.replace(',', '.');
 
         // Eliminar punto final sen díxitos
         if (textValue.endsWith(".")) {
