@@ -10,12 +10,17 @@ package calculator;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.util.Locale;
+import java.util.Objects;
+
 import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -40,7 +45,7 @@ public class SwingView implements View {
     private final JButton butAdd, butMinus, butMultiply, butDivide,
             butEqual, butCancel, butSqrt, butSquare, butInv, butCos, 
             butSin, butTan, butPower, butLog, butPercent, butAbs, butBin, 
-            butln, butNegate, butDecimal;
+            butln, butNegate, butDecimal, butPi, butE;
 
     private EventHandler eventHandler;
 
@@ -62,6 +67,9 @@ public class SwingView implements View {
         decimalFormat.setGroupingUsed(false);
 
         frame = new JFrame("Calculator");
+        // Makes frame focusable to enable key events
+        frame.setFocusable(true);
+        frame.requestFocus();
         image = loadIcon();
 
         mainPanel = new JPanel();
@@ -96,6 +104,7 @@ public class SwingView implements View {
         butDivide = createButton("/", ButtonType.FUNCTION);
         butEqual = createButton("=", ButtonType.FUNCTION);
         butCancel = createButton("C", ButtonType.FUNCTION);
+        butBackspace = createButton("Esc", ButtonType.FUNCTION);
         butSqrt = createButton("sqrt", ButtonType.FUNCTION);
         butSquare = createButton("x^2", ButtonType.FUNCTION);
         butInv = createButton("1/x", ButtonType.FUNCTION);
@@ -112,7 +121,9 @@ public class SwingView implements View {
         butAbs = createButton("abs", ButtonType.FUNCTION);
         butBin = createButton("bin", ButtonType.FUNCTION);
         butNegate = createButton("+/-", ButtonType.NUMBER);
-        butDecimal = createButton(",", ButtonType.NUMBER);
+        butDecimal = createButton(".", ButtonType.NUMBER);
+        butPi = createButton("π", ButtonType.NUMBER);
+        butE  = createButton("e",  ButtonType.NUMBER);
         
 
         setupLayout();
@@ -181,6 +192,8 @@ public class SwingView implements View {
         subPanels[6].add(butSquare);
         subPanels[6].add(butSqrt);
         subPanels[6].add(butPower);
+        subPanels[6].add(butPi);
+        subPanels[6].add(butE);
         mainPanel.add(subPanels[6]);
 
         // --- Row 7 ---
@@ -248,6 +261,19 @@ public class SwingView implements View {
         butDecimal.addActionListener(e -> eventHandler.onDecimalPressed());
         butEqual.addActionListener(e -> eventHandler.onEqualsPressed());
         butCancel.addActionListener(e -> eventHandler.onClearPressed());
+        butBackspace.addActionListener(e -> eventHandler.onBackspacePressed());
+
+        KeyAdapter pusi = new KeyAdapter() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+                System.out.println("Typed "+e.getKeyChar());
+                eventHandler.onKeyTyped(e.getKeyChar());
+            }
+        };
+        frame.addKeyListener(pusi);
+        //Constantes
+        butPi.addActionListener(e -> eventHandler.onConstantPressed(Math.PI));
+        butE.addActionListener(e  -> eventHandler.onConstantPressed(Math.E));
     }
 
     @Override

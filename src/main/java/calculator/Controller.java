@@ -12,6 +12,8 @@ package calculator;
 import calculator.domain.BinaryOperatorModes;
 import calculator.domain.UnaryOperatorModes;
 
+import java.awt.event.KeyEvent;
+
 public class Controller implements EventHandler {
     
     private final CalculatorModel model;
@@ -117,6 +119,29 @@ public class Controller implements EventHandler {
         view.clearDisplay();
         resetingInput = false;
     }
+
+    @Override
+    public void onKeyTyped(char character) {
+        // If digit, acts as if the corresponding key was pressed
+        if(Character.isDigit(character)) {
+            int charValue = Character.digit(character, 10);
+            onNumberPressed(charValue);
+            return;
+        }
+        
+        // Handles non-digit input
+        switch (character) {
+            case '+': onBinaryOperatorPressed(BinaryOperatorModes.ADD); break;
+            case '-': onBinaryOperatorPressed(BinaryOperatorModes.MINUS); break;
+            case '*': onBinaryOperatorPressed(BinaryOperatorModes.MULTIPLY); break;
+            case '/': onBinaryOperatorPressed(BinaryOperatorModes.DIVIDE); break;
+            case '^': onBinaryOperatorPressed(BinaryOperatorModes.POWER); break;
+            case '.', ',': onDecimalPressed(); break;
+            case '%': onUnaryOperatorPressed(UnaryOperatorModes.PERCENT); break;
+            case '=', KeyEvent.VK_ENTER: onEqualsPressed(); break;
+            case 'c','C', KeyEvent.VK_BACK_SPACE: onClearPressed(); break;
+        }
+    }
     
     private String formatResult(Double result) {
         if (Double.isNaN(result)) {
@@ -134,5 +159,20 @@ public class Controller implements EventHandler {
             formatted = formatted.replaceAll("0*$", "").replaceAll("\\.$", "");
             return formatted.replace('.', ',');
         }
+    }
+
+    @Override
+    public void onBackspacePressed() {
+    if (resetingInput || displayBuffer.length() == 0) return;
+    displayBuffer.deleteCharAt(displayBuffer.length() - 1);
+    view.setDisplay(displayBuffer.toString());
+}
+    
+    @Override
+    public void onConstantPressed(double value) {
+        displayBuffer = new StringBuilder();
+        displayBuffer.append(value);
+        view.setDisplay(formatResult(value));
+        resetingInput = false;
     }
 }
