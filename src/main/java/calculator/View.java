@@ -7,6 +7,8 @@
 
 package calculator;
 
+import calculator.domain.DegreesRadiansModes;
+
 
 public interface View {
     
@@ -48,4 +50,9 @@ public interface View {
     String getLabel();
     
     void setLabel(String nombre);
+    
+    
+    DegreesRadiansModes getMode();
+    
+    void setMode(DegreesRadiansModes modo);
 }

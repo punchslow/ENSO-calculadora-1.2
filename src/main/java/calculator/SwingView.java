@@ -28,6 +28,7 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 import static calculator.domain.BinaryOperatorModes.*;
+import calculator.domain.DegreesRadiansModes;
 import static calculator.domain.UnaryOperatorModes.*;
 
 public class SwingView implements View {
@@ -45,6 +46,7 @@ public class SwingView implements View {
     private JLabel degrad;
 
     private EventHandler eventHandler;
+    private DegreesRadiansModes modo = DegreesRadiansModes.DEGREES;
 
     private final Font numberFont = new Font("Segoe UI", Font.BOLD, 18);
     private final Font functionFont = new Font("Segoe UI", Font.PLAIN, 18);
@@ -332,4 +334,15 @@ public class SwingView implements View {
     public void setLabel(String nombre){
         this.degrad.setText(nombre);
     }
+    
+    @Override
+    public DegreesRadiansModes getMode(){
+        return modo;
+    }
+    
+    @Override
+    public void setMode(DegreesRadiansModes modo){
+        this.modo = modo;
+    }
+    
 }
