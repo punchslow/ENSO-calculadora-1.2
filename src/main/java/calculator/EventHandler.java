@@ -50,4 +50,8 @@ public interface EventHandler {
      * Handle the degree/radian button press
      */
     void onDegreesPressed();
+
+    void onBackspacePressed();
+    /*Controla los botones de pi y e*/
+    void onConstantPressed(double value);
 }

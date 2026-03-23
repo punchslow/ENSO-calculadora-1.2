@@ -148,4 +148,19 @@ public class Controller implements EventHandler {
             return formatted.replaceAll("0*$", "").replaceAll("\\.$", "");
         }
     }
+
+    @Override
+    public void onBackspacePressed() {
+    if (resetingInput || displayBuffer.length() == 0) return;
+    displayBuffer.deleteCharAt(displayBuffer.length() - 1);
+    view.setDisplay(displayBuffer.toString());
+}
+    
+    @Override
+    public void onConstantPressed(double value) {
+        displayBuffer = new StringBuilder();
+        displayBuffer.append(value);
+        view.setDisplay(formatResult(value));
+        resetingInput = false;
+    }
 }
